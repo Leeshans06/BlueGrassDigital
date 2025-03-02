@@ -1,0 +1,20 @@
+﻿@model blueGrassDigital.Models.HeroCtaBlockModel
+
+<div class="hero-block bg-light p-5 rounded text-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h2>@Model.Title</h2>
+                <p class="lead">@Model.Description</p>
+                @if (Model.ImageUrl != null)
+                {
+                    <img src="@Model.ImageUrl.MediaUrl()" alt="@Model.Title" class="img-fluid rounded mb-4" />
+                }
+                @if (Model.PrimaryCtaUrl != null)
+                {
+                    <a class="btn btn-primary" href="@Model.PrimaryCtaUrl.Url" target="@Model.PrimaryCtaUrl.Target">@Model.PrimaryCtaUrl.Name</a>
+                }
+            </div>
+        </div>
+    </div>
+</div>

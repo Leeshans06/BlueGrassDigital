@@ -1,0 +1,90 @@
+﻿@using Umbraco.Cms.Core.Models;
+@{
+    var pageModel = ViewData["PageModel"];
+    var Title = pageModel?.GetType().GetProperty("Title")?.GetValue(pageModel) as string;
+    var HeaderColor = pageModel?.GetType().GetProperty("HeaderColor")?.GetValue(pageModel) as string;
+    var Slogan = pageModel?.GetType().GetProperty("Slogan")?.GetValue(pageModel) as string;
+    var FooterText = pageModel?.GetType().GetProperty("FooterText")?.GetValue(pageModel) as string;
+
+    string bootstrapColorClass; 
+
+    if (HeaderColor != null) // Check if HeaderColor is not null
+    {
+        switch (HeaderColor.ToLower())
+        {
+            case "orange":
+                bootstrapColorClass = "warning";
+                break;
+            case "blue":
+                bootstrapColorClass = "primary";
+                break;
+            case "red":
+                bootstrapColorClass = "danger";
+                break;
+            case "light blue":
+                bootstrapColorClass = "info";
+                break;
+            case "black":
+                bootstrapColorClass = "dark";
+                break;
+            case "white":
+                bootstrapColorClass = "light";
+                break;
+            case "green":
+                bootstrapColorClass = "success";
+                break;           
+            case "grey":
+                bootstrapColorClass = "secondary";
+                break;
+            default:
+                bootstrapColorClass = HeaderColor.ToLower();
+                break;
+        }
+    }
+    else
+    {
+        bootstrapColorClass = "primary"; // Handle the case where HeaderColor is null
+    }
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@Title</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+
+<header class="bg-@bootstrapColorClass text-white p-3">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center w-100">
+            <div>
+                    <h1 class="mb-0">@Title</h1>
+                    <p class="mb-0 text-white-50">@Slogan</p>
+            </div>
+            <nav>
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="/">General</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="/contact-us">Contact</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+ <main>
+    @RenderBody()
+ </main>
+
+
+ <footer class="bg-@bootstrapColorClass text-white text-center p-3 mt-5">
+        <p>@FooterText</p> 
+ </footer>
+   
+</body>
+</html>

@@ -1,0 +1,40 @@
+﻿@using blueGrassDigital.Models
+@using blueGrassDigital.ViewModels;
+@{
+    Layout = "./Partials/shared/Layout.cshtml";
+    var pageModel = (ContactUsPageViewModel)ViewData["PageModel"];
+}
+@if (pageModel.PageHeader != null)
+{
+    @foreach (var block in pageModel.PageHeader)
+    {
+        // Check the type of each block in the PageHeader Grid
+        if (block.Content.ContentType.Alias == "heroBlock")
+        {
+            @await Component.InvokeAsync("HeroBlock", block.Content)
+        }
+        else if (block.Content.ContentType.Alias == "heroCtaBlock")
+        {
+            @await Component.InvokeAsync("HeroCtaBlock", block.Content)
+        }
+        else
+        {
+            <p>Unknown block type in PageHeader</p>
+        }
+    } 
+}
+
+@if (pageModel.MainContent != null)
+{
+     @foreach (var block in pageModel.MainContent)
+    {      
+        if (block.Content.ContentType.Alias == "rteBlock")
+        {
+            @await Component.InvokeAsync("RteBlock", block.Content)
+        }
+        else
+        {
+            <p>Unknown block type in MainContent</p>
+        }
+    }
+}
