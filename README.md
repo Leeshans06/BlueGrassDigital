@@ -9,7 +9,7 @@
 
 ### Clone the Repository
 ```sh
-git clone <repository-url>
+git clone git@github.com:Leeshans06/BlueGrassDigital.git
 ```
 
 ### Extract Database and Media Files
